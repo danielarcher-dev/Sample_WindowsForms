@@ -16,7 +16,7 @@ namespace Drag_and_Drop_File_Picker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new BasicFileDropper());
         }
     }
 }
