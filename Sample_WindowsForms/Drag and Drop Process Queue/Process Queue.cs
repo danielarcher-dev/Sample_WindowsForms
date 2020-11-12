@@ -58,11 +58,6 @@ namespace Drag_and_Drop_Process_Queue
                 AddArray_To_ListBox(FilePicker_DroppedFile(e), (ListBox)sender);
             else if (e.Data.GetDataPresent(DataFormats.Text))
             {
-                AddString_To_ListBox((String)e.Data.GetData(DataFormats.Text), (ListBox)sender);
-            }
-            // but move a list item that was clicked on
-            else
-            {
                 generic_MoveItem(sender, e);
             }
         }
@@ -70,28 +65,35 @@ namespace Drag_and_Drop_Process_Queue
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
             {
-                // TODO: get underlying data and add to list
-                //AddString_To_ListBox(e.Data.ToString(), (ListBox)sender);
-
-                // TODO: don't forget to remove from source list
                 ListBox listBox = (ListBox)sender;
                 Point point = listBox.PointToClient(new Point(e.X, e.Y));
                 int index = listBox.IndexFromPoint(point);
                 if (index < 0) index = listBox.Items.Count - 1;
                 object data = e.Data.GetData(typeof(String));
                 listBox.Items.Remove(data);
-                //listBox.Items.Insert(index, data);
             }
         }
         private void generic_MoveItem(object sender, DragEventArgs e)
         {
+            // We need to handle both:
+            // - when an item is dragged from one side to the other
+            // - when an item is dragged from one side to a new position on the same side
             ListBox listBox = (ListBox)sender;
             Point point = listBox.PointToClient(new Point(e.X, e.Y));
             int index = listBox.IndexFromPoint(point);
             if (index < 0) index = listBox.Items.Count - 1;
             object data = e.Data.GetData(typeof(String));
             listBox.Items.Remove(data);
-            listBox.Items.Insert(index, data);
+            if (listBox.Items.Count == 0)
+            {
+                // Can't just insert if the list box is empty.
+                AddString_To_ListBox((String)e.Data.GetData(DataFormats.Text), (ListBox)sender);
+            }
+            else
+            {
+                listBox.Items.Insert(index, data);
+            }
+            
         }
 
         private void generic_DragOver(object sender, DragEventArgs e)
