@@ -43,11 +43,21 @@
                 <!--</StackPanel>-->
             </Border>
         </Viewbox>
-
-        <Viewbox Margin="1,0,1,0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
-            <TextBox x:Name="annotation_block" HorizontalAlignment="Stretch" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="Auto" AcceptsReturn="True" PlaceholderText="Annotations here...." HorizontalContentAlignment="Left" TextChanged="annotation_block_TextChanged"/>
-        </Viewbox>
-        <Button Content="Save" Grid.Column="1" Margin="5,0,5,0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Viewbox Margin="1,0,1,0" Grid.Row="0">
+                
+                <TextBox x:Name="trade_block" HorizontalAlignment="Stretch" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="Auto" AcceptsReturn="True" PlaceholderText="Annotations here...." HorizontalContentAlignment="Left" TextChanged="annotation_block_TextChanged"/>
+            </Viewbox>
+            <Viewbox Margin="1,0,1,0" Grid.Row="1">
+                <TextBox x:Name="annotation_block" HorizontalAlignment="Stretch" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="Auto" AcceptsReturn="True" PlaceholderText="Annotations here...." HorizontalContentAlignment="Left" TextChanged="annotation_block_TextChanged"/>
+            </Viewbox>
+        </Grid>
+       
+        <Button Content="Save" Grid.Column="1" Margin="5,0,5,0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click"/>
 
     </Grid>
 </Page>
