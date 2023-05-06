@@ -30,7 +30,8 @@ namespace Simple_App
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Page2));
+            Frame.Navigate(typeof(Page2), name.Text);
+
         }
     }
 }

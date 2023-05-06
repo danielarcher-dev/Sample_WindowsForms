@@ -8,11 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock x:Name="pageTitle" Text="Page 2"
-               Margin="16" Style="{StaticResource TitleTextBlockStyle}"/>
-        <HyperlinkButton Content="Click to go to main page"
+    <StackPanel VerticalAlignment="Center">
+        <TextBlock HorizontalAlignment="Center" x:Name="greeting"/>
+        <HyperlinkButton Content="Click to go to page 1"
                      Click="HyperlinkButton_Click"
                      HorizontalAlignment="Center"/>
-    </Grid>
+    </StackPanel>
 </Page>
