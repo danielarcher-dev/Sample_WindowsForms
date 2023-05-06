@@ -27,6 +27,8 @@ namespace UWP_ImageGrid
     public sealed partial class MainPage : Page
     {
         List<BitmapImage> imageList = new List<BitmapImage>();
+        List<String> annotationList = new List<string>();
+
         string message = "";
 
         public MainPage()
@@ -63,6 +65,7 @@ namespace UWP_ImageGrid
                         //Screenshot.Source = bitmapImage;
                         //Screenshot.Visibility = Visibility.Visible;
                         imageList.Add(bitmapImage);
+                        annotationList.Add("");
                         message = "Image is retrieved from the clipboard and pasted successfully.";
                     }
                 }
@@ -91,7 +94,7 @@ namespace UWP_ImageGrid
                 }
                 else if(position < imageList.Count)
                 {
-                    ViewBoxImage.Source = imageList[position];
+                    update_image(position);
                     message = String.Format("this is a string{0}", position);
                 }
                 else if (position >= imageList.Count)
@@ -101,7 +104,7 @@ namespace UWP_ImageGrid
                     // we can safely do this, because we know it will never be called unless position >= imageList
                     // if position=0 and imageList.Count=0?
 
-                    ViewBoxImage.Source = imageList[position];
+                    update_image(position);
                 }
                 message_block.Text = message;
             }
@@ -114,9 +117,20 @@ namespace UWP_ImageGrid
 
         }
 
+        private void update_image(int position)
+        {
+            ViewBoxImage.Source = imageList[position];
+            annotation_block.Text = annotationList[position];
+        }
+
         private void Control1_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
 
+        }
+
+        private void annotation_block_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            annotationList[position] = annotation_block.Text;
         }
     }
 }

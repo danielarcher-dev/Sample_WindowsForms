@@ -45,8 +45,9 @@
         </Viewbox>
 
         <Viewbox Margin="1,0,1,0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
-            <TextBox x:Name="annotation_block" HorizontalAlignment="Stretch" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="Auto" AcceptsReturn="True" PlaceholderText="Annotations here...." HorizontalContentAlignment="Left"/>
+            <TextBox x:Name="annotation_block" HorizontalAlignment="Stretch" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="Auto" AcceptsReturn="True" PlaceholderText="Annotations here...." HorizontalContentAlignment="Left" TextChanged="annotation_block_TextChanged"/>
         </Viewbox>
+        <Button Content="Save" Grid.Column="1" Margin="5,0,5,0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
     </Grid>
 </Page>
