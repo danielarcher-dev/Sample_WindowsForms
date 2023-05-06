@@ -12,8 +12,8 @@
         <Button x:Name="add_screenshot" Content="add screenshot" Margin="104,77,0,0" VerticalAlignment="Top" Click="add_screenshot_Click"/>
         <Button x:Name="ShowNext" Content="Button" Margin="252,77,0,0" VerticalAlignment="Top" Click="ShowNext_Click"/>
 
-        <Viewbox Stretch="Uniform" StretchDirection="Both" Margin="10,114,860,0" Height="934" VerticalAlignment="Stretch">
-            <Border BorderBrush="Gray" BorderThickness="15">
+        <Viewbox Stretch="Uniform" StretchDirection="Both" Margin="10,114,0,0" HorizontalAlignment="Left" Width="1050">
+            <Border BorderBrush="Gray" BorderThickness="15" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Background="DarkGray">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Fill="Blue" Height="10" Width="40"/>
@@ -22,12 +22,12 @@
                         <Rectangle Fill="Yellow" Height="10" Width="40"/>
                     </StackPanel>
                     <!--<Image x:Name="ViewBoxImage" Source="ms-appx:///Assets/Slices.png"/>-->
-                    <ScrollViewer Height="270" ZoomMode="Enabled"
+                    <ScrollViewer ZoomMode="Enabled"
                             IsTabStop="True" IsVerticalScrollChainingEnabled="True"
                             ManipulationCompleted="Control1_ManipulationCompleted"
-                            HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto"
-                            VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
-                        <Image x:Name="ViewBoxImage" Source="ms-appx:///Assets/SampleMedia/cliff.jpg" AutomationProperties.Name="cliff" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible"
+                            VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+                        <Image x:Name="ViewBoxImage" Source="ms-appx:///Assets/SampleMedia/cliff.jpg" AutomationProperties.Name="cliff" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <!--<Image x:Name="ViewBoxImage" Source="ms-appx:///Assets/Slices.png"/>-->
 
                     </ScrollViewer>
