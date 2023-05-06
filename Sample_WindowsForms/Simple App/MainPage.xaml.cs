@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -30,7 +31,11 @@ namespace Simple_App
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Page2), name.Text);
+            //Frame.Navigate(typeof(Page2), name.Text);
+            Frame.Navigate(typeof(Page2),
+               name.Text,
+               new SlideNavigationTransitionInfo()
+               { Effect = SlideNavigationTransitionEffect.FromRight });
 
         }
     }
