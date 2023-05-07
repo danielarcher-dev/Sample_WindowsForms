@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="UWP_SaveImage_LocalFolder.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWP_SaveImage_LocalFolder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="message_block" Margin="0,-100,0,0"/>
+        <Button x:Name="Save" Content="Save" Grid.Column="0" Height="100" Width="99" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Save_Click"/>
+        <Button x:Name="Load" Content="Load" Grid.Column="0" Height="100" Width="99" Margin="0,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Load_Click"/>
+        <Button x:Name="Next" Content="Next" Grid.Column="0" Height="100" Width="99" Margin="0,220,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ShowNext_Click"/>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="Input_Text_Box" Grid.Row="0" Width="Auto" Height="Auto" Margin="0,0,150,0"/>
+            <Button x:Name="Add_To_List" Content="Add" Grid.Row="0" Height="200 " Width="150" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Click="add_screenshot_Click"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Stretch="Uniform" StretchDirection="Both" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" >
+                    <Border BorderBrush="Gray" BorderThickness=".3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <ScrollViewer ZoomMode="Enabled"
+                            IsTabStop="True" IsVerticalScrollChainingEnabled="True"
+                            ManipulationCompleted="ScrollViewer_ManipulationCompleted"
+                            HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible"
+                            VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+                            <Image x:Name="ViewBoxImage" Source="ms-appx:///Assets/SampleMedia/cliff.jpg" AutomationProperties.Name="cliff" Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </ScrollViewer>
+                    </Border>
+                </Viewbox>
+                <TextBox x:Name="annotation_block" Grid.Column="1" HorizontalAlignment="Stretch" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="Auto" AcceptsReturn="True" PlaceholderText="Annotations here...." HorizontalContentAlignment="Left" TextChanged="annotation_block_TextChanged"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
