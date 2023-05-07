@@ -55,13 +55,19 @@ namespace UWP_SaveImage_LocalFolder
         {
             return itms[position];
         }
+        public SoftwareBitmap GetSoftwareBitmap(int position)
+        {
+            return itms[position].SoftwareBitmap;
+        }
 
+        public string GetAnnotation(int position)
+        {
+            return itms[position].Annotation;
+        }
         public void UpdateAnnotation(int position, String annotation)
         {
             itms[position].Annotation = annotation;
         }
-
-        //public void Update
 
     }
     public sealed partial class MainPage : Page
@@ -70,10 +76,9 @@ namespace UWP_SaveImage_LocalFolder
         {
             this.InitializeComponent();
         }
-        //List<BitmapImage> imageList = new List<BitmapImage>();
-        //List<String> annotationList = new List<string>();
-        //List<SoftwareBitmap> softwareBitmaps = new List<SoftwareBitmap>();
 
+        ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
         lst mylist = new lst();
 
         string message = "";
@@ -214,12 +219,63 @@ namespace UWP_SaveImage_LocalFolder
                 {
                     await encoder.FlushAsync();
                 }
-
-
             }
         }
 
         async private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            int count = 0;
+            foreach(itm myitem in mylist)
+            {
+
+            }
+            writeAnnotation(position);
+            writeImage(position);
+
+        }
+        async void writeAnnotation(int position)
+        {
+            string fileName = String.Format("{0}_annotation.txt", position);
+
+            StorageFile sampleFile = await localFolder.CreateFileAsync(fileName,CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(sampleFile, mylist.GetAnnotation(position));
+        }
+
+        async void writeImage(int position)
+        {
+            string fileName = String.Format("{0}.jpg", position);
+            StorageFile sampleFile = await localFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            using (IRandomAccessStream stream = await sampleFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream);
+                encoder.SetSoftwareBitmap(mylist.GetSoftwareBitmap(position));
+                encoder.IsThumbnailGenerated = true;
+                try
+                {
+                    await encoder.FlushAsync();
+                }
+                catch (Exception err)
+                {
+                    const int WINCODEC_ERR_UNSUPPORTEDOPERATION = unchecked((int)0x88982F81);
+                    switch (err.HResult)
+                    {
+                        case WINCODEC_ERR_UNSUPPORTEDOPERATION:
+                            // If the encoder does not support writing a thumbnail, then try again
+                            // but disable thumbnail generation.
+                            encoder.IsThumbnailGenerated = false;
+                            break;
+                        default:
+                            throw;
+                    }
+                }
+                if (encoder.IsThumbnailGenerated == false)
+                {
+                    await encoder.FlushAsync();
+                }
+            }
+        }
+
+        async private void Save_Image(object sender, RoutedEventArgs e)
         {
             FileSavePicker fileSavePicker = new FileSavePicker();
             fileSavePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
@@ -233,6 +289,8 @@ namespace UWP_SaveImage_LocalFolder
                 // The user cancelled the picking operation
                 return;
             }
+
+            
 
             SaveSoftwareBitmapToFile(mylist.GetItm(position).SoftwareBitmap, outputFile);
         }
