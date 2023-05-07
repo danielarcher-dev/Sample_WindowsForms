@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="UWP_SettingsFile.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWP_SettingsFile"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="Save" Content="Save" Grid.Column="0" Height="100" Width="99" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Save_Click"/>
+        <Button x:Name="Load" Content="Load" Grid.Column="0" Height="100" Width="99" Margin="0,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Load_Click"/>
+        
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="Input_Text_Box" Grid.Row="0" Width="Auto" Height="Auto" Margin="0,0,150,0"/>
+            <Button x:Name="Add_To_List" Content="Add" Grid.Row="0" Height="200 " Width="150" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Click="Add_To_List_Click"/>
+            <ListBox x:Name="List_Box" SelectionChanged="ColorListBox_SelectionChanged" Width="Auto" Grid.Row="1">
+
+            </ListBox>
+        </Grid>
+    </Grid>
+</Page>
