@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using System.Threading.Tasks;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace UWP_SaveImage_LocalFolder
@@ -222,16 +223,19 @@ namespace UWP_SaveImage_LocalFolder
             }
         }
 
-        async private void Save_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
-            int count = 0;
-            foreach(itm myitem in mylist)
+            for(int i = 0; i<mylist.Count; i++)
             {
-
+                Action<object> action = (object obj) =>
+                {
+                    writeAnnotation(i);
+                    writeImage(i);
+                };
+                Task t1 = new Task(action, i);
+                t1.Start();
+                t1.Wait();
             }
-            writeAnnotation(position);
-            writeImage(position);
-
         }
         async void writeAnnotation(int position)
         {
@@ -240,6 +244,8 @@ namespace UWP_SaveImage_LocalFolder
             StorageFile sampleFile = await localFolder.CreateFileAsync(fileName,CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(sampleFile, mylist.GetAnnotation(position));
         }
+
+
 
         async void writeImage(int position)
         {
