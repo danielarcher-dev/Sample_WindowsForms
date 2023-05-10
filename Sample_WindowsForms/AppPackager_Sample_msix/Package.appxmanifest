@@ -2,26 +2,25 @@
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
-  IgnorableNamespaces="uap mp uap6">
+  IgnorableNamespaces="uap rescap uap6">
 
   <Identity
-    Name="e93c6fee-03db-4dbe-9d15-a554f8d64542"
+    Name="68ac4f4e-cf6c-4946-8b76-01174505fa0d"
     Publisher="CN=Skiff Studios Development"
     Version="0.0.1.0" />
 
-  <mp:PhoneIdentity PhoneProductId="e93c6fee-03db-4dbe-9d15-a554f8d64542" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
-
   <Properties>
-    <DisplayName>UWP_SaveImage_LocalFolder_Sample</DisplayName>
+    <DisplayName>AppPackager_Sample_msix</DisplayName>
     <PublisherDisplayName>Skiff Studios Development</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>
@@ -31,15 +30,15 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="UWP_SaveImage_LocalFolder.App">
+      EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="UWP_SaveImage_LocalFolder"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="UWP_SaveImage_LocalFolder"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        DisplayName="UWP_SaveImage_LocalFolder_Sample"
+        Description="AppPackager_Sample_msix"
+        BackgroundColor="transparent"
+        Square150x150Logo="Images\Square150x150Logo.png"
+        Square44x44Logo="Images\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
+        <uap:SplashScreen Image="Images\SplashScreen.png" />
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
       </uap:VisualElements>
@@ -47,5 +46,7 @@
   </Applications>
 
   <Capabilities>
-    <uap6:Capability Name="graphicsCapture"/></Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+    <uap6:Capability Name="graphicsCapture"/>
+  </Capabilities>
 </Package>
